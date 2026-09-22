@@ -320,8 +320,28 @@ h3 {
 } */
 
 #intro.section {
-  background: #e7affb repeat;
-  position: relative;
+  background: linear-gradient(
+    270deg,
+    #f93c84,
+    #cf5cf6,
+    #ab6efa
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 #intro.section .container {
@@ -559,7 +579,8 @@ small {
 /* .purple */
 
 .purple {
-  background-color: #b46af4 !important;
+  /* add in -webkit-linear-gradient(to right, #8CADA7 #8CADA7) */
+  background-color: #bf89de !important;
 }
 
 /* .purple {
