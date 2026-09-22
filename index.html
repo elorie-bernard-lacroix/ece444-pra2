@@ -71,6 +71,131 @@
   <meta name="google-site-verification" content="_qxK8tePiU2fhnwlwnJ7pkDFnj1k2EiKq_cYGy1Cb84" />
 </head>
 
+<script>
+  const projects = [
+    {
+      title: "SmartStudy",
+      image: "assets/img/projects/SmartStudy.png",
+      description: "An AI-powered study habit recommender web app.",
+      tools: "Python, Pandas, Scikit-learn, TabPFN, Gradio",
+      details: "A machine learning tool that takes a student's current study habits and a target GPA, then recommends the minimal lifestyle changes needed to get there.",
+      liveUrl: "https://elorie-bernard-lacroix.github.io/smart-study.html",
+      githubUrl: "https://github.com/elorie-bernard-lacroix/SmartStudy"
+    },
+    {
+      title: "SunWater",
+      image: "assets/img/projects/WaterSan.png",
+      description: "Automated water sanitation system",
+      tools: "3D Printing, Sensors, Motors, Fusion360, Notion",
+      details: "A prototype system that heats water to a specified temperature for a given time, then automatically dispenses it into a potable water tank.",
+      liveUrl: "https://elorie-bernard-lacroix.github.io/water-sanitation.html",
+      githubUrl: ""
+    },
+    {
+      title: "SmartStudy",
+      image: "assets/img/projects/SmartStudy.png",
+      description: "An AI-powered study habit recommender web app.",
+      tools: "Python, Pandas, Scikit-learn, TabPFN, Gradio",
+      details: "The pipeline combines a TabPFN GPA predictor, numerical optimization, KNN peer matching, and GPT-4 text generation.",
+      liveUrl: "https://elorie-bernard-lacroix.github.io/smart-study.html",
+      githubUrl: "https://github.com/elorie-bernard-lacroix/SmartStudy"
+    },
+    {
+      title: "SmartStudy",
+      image: "assets/img/projects/SmartStudy.png",
+      description: "An AI-powered study habit recommender web app.",
+      tools: "Python, Pandas, Scikit-learn, TabPFN, Gradio",
+      details: "A Gradio web app that generates personalized academic recommendations using machine learning and generative AI.",
+      liveUrl: "https://elorie-bernard-lacroix.github.io/smart-study.html",
+      githubUrl: "https://github.com/elorie-bernard-lacroix/SmartStudy"
+    }
+  ];
+
+  const projectsToShowInitially = 2;
+  let displayedProjects = 0;
+
+  function createProjectCard(project) {
+    const githubLink = project.githubUrl
+      ? `
+        <a href="${project.githubUrl}" target="_blank"
+          data-position="top" data-tooltip="View Source"
+          class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped">
+          <i class="fa fa-github"></i>
+        </a>
+      `
+      : "";
+
+    return `
+      <div class="col s12 m6 l4">
+        <div class="card medium">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img alt="${project.title} project" src="${project.image}"
+              style="height: 100%; width: 100%" class="activator" />
+          </div>
+
+          <div class="card-content">
+            <span class="card-title activator purple-text hoverline">
+              ${project.title}
+              <i class="mdi-navigation-more-vert right"></i>
+            </span>
+            <p>${project.description}</p>
+          </div>
+
+          <div class="card-reveal">
+            <span class="card-title grey-text">
+              <small>Accomplishments</small>
+              <i class="mdi-navigation-close right"></i>
+            </span>
+
+            <ul>
+              <li><b>Tools:</b> ${project.tools}</li>
+              <li>${project.details}</li>
+            </ul>
+
+            <div class="card-action">
+              <a href="${project.liveUrl}" target="_blank"
+                data-position="top" data-tooltip="View Online"
+                class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped">
+                <i class="fa fa-external-link"></i>
+              </a>
+              ${githubLink}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderProjects() {
+    const projectsList = document.getElementById("projects-list");
+    const loadMoreButton = document.getElementById("load-more-projects");
+
+    const nextProjects = projects.slice(
+      displayedProjects,
+      displayedProjects + projectsToShowInitially
+    );
+
+    nextProjects.forEach(project => {
+      projectsList.insertAdjacentHTML("beforeend", createProjectCard(project));
+    });
+
+    displayedProjects += nextProjects.length;
+
+    if (displayedProjects >= projects.length) {
+      loadMoreButton.disabled = true;
+      loadMoreButton.style.display = "none";
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderProjects();
+
+    document
+      .getElementById("load-more-projects")
+      .addEventListener("click", renderProjects);
+  });
+</script>
+
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGZH8HT"
@@ -420,81 +545,11 @@
     <section id="projects" class="section scrollspy">
       <h3 class="page-title white-text purple">Projects</h3>
       <div class="container">
-        <div class="row">
+        <div id="projects-list" class="row"></div>
 
-          <div class="col s12 m6 l4">
-            <div class="card medium">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img alt="music streaming app" src="assets/img/projects/SmartStudy.png" style="height: 100%; width: 100%" class="activator" />
-              </div>
-              <div class="card-content">
-                <span class="card-title activator purple-text hoverline">SmartStudy<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  An AI-powered study habit recommender web app.
-                </p>
-              </div>
-              <div class="card-reveal">
-                <!-- TODO: change this -- only close button -->
-                <!-- <span class="card-title brown-text">Accomplishments<i class="mdi-navigation-close right"></i></span> -->
-                <span class="card-title grey-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b>Python, Pandas, Scikit-learn, TabPFN, Gradio</li>
-                  <li>A machine learning tool that takes a student's current study habits and a target GPA, then recommends the minimal lifestyle changes needed to get there. The pipeline combines a TabPFN GPA predictor, a numerical optimizer, KNN peer matching, and GPT-4 text generation, all wrapped in a Gradio web app.</li>
-
-
-                </ul>
-                <div class="card-action">
-                  <a aria-label="Visit " href="https://elorie-bernard-lacroix.github.io/smart-study.html" target="_blank" data-position="top"
-                    data-tooltip="View Online"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-external-link"></i></a>
-                  <a aria-label="Visit the GitHub repo for  project" href="https://github.com/elorie-bernard-lacroix/SmartStudy"
-                    target="_blank" data-position="top" data-tooltip="View Source"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col s12 m6 l4">
-            <div class="card medium">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img alt="quiz app" src="assets/img/projects/WaterSan.png" style="height: 100%; width: 100%" class="activator" />
-              </div>
-              <div class="card-content">
-                <span class="card-title activator purple-text hoverline">SunWater<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  Automated water sanitation system
-                </p>
-              </div>
-              <div class="card-reveal">
-                <!-- TODO: change this -- only close button -->
-                <!-- <span class="card-title brown-text">Accomplishments<i class="mdi-navigation-close right"></i></span> -->
-                <span class="card-title grey-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b> 3D Printing, Sensors, Motors, Fusion360, Notion</li>
-                  <li>With the use of 3D printing, sensors, motors, and online tools such as Fusion360 and Notion, my team and I prototyped a system that could heat water to a specified temperature, for a given time, and then automatically dispense it to a tank of potable water.</li>
-
-                </ul>
-                <div class="card-action">
-                  <a aria-label="Visit " href="https://elorie-bernard-lacroix.github.io/water-sanitation.html" target="_blank" data-position="top"
-                    data-tooltip="View Online"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-external-link"></i></a>
-                  <!-- <a aria-label="Visit the GitHub repo for  project" href="https://github.com/ElorieBernard-Lacroix/QuizUp"
-                    target="_blank" data-position="top" data-tooltip="View Source"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-github"></i></a> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <button id="load-more-projects" class="btn waves-effect waves-light purple">
+          Load More
+        </button>
       </div>
     </section>
 
